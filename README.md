@@ -4,6 +4,7 @@ Custom Jeopardy implementation
 Download latest release, update config.yml/questions.yml and add assets to the 'Assets' directory.
 
 General Usage:
+- Start Jeopardy.exe (Windows Defender might complain about missing publisher and you might have to install .NET runtime)
 - Click categories to reveal category names at the beginning of the game
 - Click on questions to open them up, click again to reveal answer
 - If question has media: for images, click '?' to reveal. for sound, click volume icon to start/stop playback
