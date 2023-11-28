@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="Jeopardy.View.JeopardyQuestionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:Jeopardy.ViewModel"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{d:DesignInstance vm:JeopardyQuestionViewModel}">
+    <UserControl.Resources>
+        <ResourceDictionary Source="Resources.xaml"/>
+    </UserControl.Resources>
+    
+    <Button Style="{StaticResource JeopardyButton}"
+            Command="{Binding OnQuestionSelectedCommand}"
+            IsEnabled="{Binding IsPickable}"
+            >
+        <TextBlock TextWrapping="Wrap"
+                   HorizontalAlignment="Center"
+                   Visibility="{Binding Path=IsPickable, Converter={StaticResource BooleanToVisibilityConverter}}"
+                   Text="{Binding PointValue}"
+                   />
+    </Button>
+</UserControl>

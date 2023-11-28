@@ -1,0 +1,167 @@
+﻿<UserControl x:Class="Jeopardy.View.JeopardyGameView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:Jeopardy.ViewModel"
+             mc:Ignorable="d"
+             d:DesignHeight="900" d:DesignWidth="1600" d:DataContext="{d:DesignInstance vm:JeopardyGameViewModel}">
+    <UserControl.Resources>
+        <ResourceDictionary Source="Resources.xaml"/>
+    </UserControl.Resources>
+    
+    <Grid Background="{StaticResource BackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Category screen -->
+        <Viewbox Grid.Row="0"
+                 VerticalAlignment="Top"
+                 Stretch="Fill"
+                 Margin="50 0 50 0"
+                 Visibility="{Binding Path=ShowBoard, Converter={StaticResource BooleanToVisibilityConverter}}"
+                 >
+            <ItemsControl ItemsSource="{Binding Categories}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </Viewbox>
+        
+        <!-- Question screen -->
+        <Viewbox Grid.Row="0"
+                 VerticalAlignment="Center"
+                 Stretch="Uniform"
+                 Margin="50 0 50 0"
+                 Visibility="{Binding Path=ShowQuestion, Converter={StaticResource BooleanToVisibilityConverter}}"
+                 >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <Label Grid.Row="0"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       >
+                    <TextBlock TextWrapping="Wrap"
+                               Text="{Binding SelectedQuestion.QuestionText}"
+                               Foreground="{StaticResource TextBrush}"
+                               FontSize="40"
+                               TextAlignment="Center"
+                               HorizontalAlignment="Center"
+                               />
+                </Label>
+                <Button Grid.Row="1"
+                        Style="{StaticResource JeopardyButton}"
+                        BorderThickness="0"
+                        FontFamily="Segoe MDL2 Assets"
+                        Command="{Binding OnPlayMediaCommand}"
+                        Visibility="{Binding Path=HasSoundMedia, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        Width="100"
+                        >
+                    &#xE767;
+                </Button>
+                <Viewbox Grid.Row="2"
+                         MinHeight="500"
+                         MinWidth="500"
+                         Stretch="Uniform"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center"
+                         Visibility="{Binding Path=HasImageMedia, Converter={StaticResource BooleanToVisibilityConverter}}"
+                         >
+                    <Button Style="{StaticResource JeopardyButton}"
+                            BorderThickness="0"
+                            Command="{Binding OnRevealImageCommand}"
+                            FontSize="70"
+                            >
+                        ?
+                    </Button>
+                </Viewbox>
+                <Viewbox Grid.Row="2"
+                         Stretch="Uniform"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center"
+                         Visibility="{Binding Path=IsImageRevealed, Converter={StaticResource BooleanToVisibilityConverter}}"
+                         >
+                    <Image Source="{Binding SelectedQuestion.ImageMedia}"
+                           />
+                </Viewbox>
+            </Grid>
+        </Viewbox>
+        
+        <!-- Answer screen -->
+        <Viewbox Grid.Row="0"
+                 VerticalAlignment="Center"
+                 Stretch="Uniform"
+                 Margin="50 0 50 0"
+                 Visibility="{Binding Path=ShowAnswer, Converter={StaticResource BooleanToVisibilityConverter}}"
+                 >
+            <Label HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   >
+                <TextBlock TextWrapping="Wrap"
+                           Text="{Binding SelectedQuestion.Answer}"
+                           Foreground="{StaticResource TextBrush}"
+                           FontSize="40"
+                           TextAlignment="Center"
+                           HorizontalAlignment="Center"
+                           />
+            </Label>
+        </Viewbox>
+        
+        <!-- End card screen -->
+        <Viewbox Grid.Row="0"
+                 VerticalAlignment="Center"
+                 Stretch="Uniform"
+                 Margin="50 0 50 0"
+                 Visibility="{Binding Path=ShowEndCard, Converter={StaticResource BooleanToVisibilityConverter}}"
+                 >
+            <Label HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   >
+                <TextBlock TextWrapping="Wrap"
+                           Text="{Binding EndCardText}"
+                           Foreground="{StaticResource TextBrush}"
+                           FontSize="35"
+                           TextAlignment="Center"
+                           HorizontalAlignment="Center"
+                           />
+            </Label>
+        </Viewbox>
+        
+        <!-- Go Next button -->
+        <Grid Grid.Row="1">
+            <Button HorizontalAlignment="Right"
+                    HorizontalContentAlignment="Right"
+                    Visibility="{Binding Path=HasGoNext, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    Style="{StaticResource JeopardyButton}"
+                    Command="{Binding OnGoNextCommand}"
+                    BorderThickness="0"
+                    FontFamily="Segoe MDL2 Assets"
+                    FontSize="50"
+                    Margin="0 0 20 0"
+                    >
+                &#xE724;
+            </Button>
+        </Grid>
+        
+        <!-- Teams element -->
+        <Viewbox Grid.Row="2">
+            <ItemsControl ItemsSource="{Binding Teams}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </Viewbox>
+    </Grid>
+</UserControl>

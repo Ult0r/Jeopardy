@@ -1,0 +1,11 @@
+﻿teams:
+  - name: "Team 1"
+    startingPoints: 1000
+  - name: "Team 2"
+    startingPoints: -200
+  - name: "Team 3"
+  - name: "Team 4"
+endCardText: "Thanks for playing!"
+pointsFactor: 200
+wrongAnswerDeducesPoints: true
+wrongAnswerHalfPoints: true

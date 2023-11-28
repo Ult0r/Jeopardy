@@ -1,0 +1,19 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm="clr-namespace:Jeopardy.ViewModel"
+                    xmlns:vw="clr-namespace:Jeopardy.View"
+                    >
+    <DataTemplate DataType="{x:Type vm:JeopardyGameViewModel}">
+        <vw:JeopardyGameView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:JeopardyCategoryViewModel}">
+        <vw:JeopardyCategoryView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:JeopardyQuestionViewModel}">
+        <vw:JeopardyQuestionView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:JeopardyTeamViewModel}">
+        <vw:JeopardyTeamView/>
+    </DataTemplate>
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+</ResourceDictionary>
